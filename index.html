@@ -19,11 +19,16 @@
       /* Hide the dropdown menus by default */
 .dropdown-menu {
    display: none;
+   color: black;
+   background-color: #097B3E;
+   margin: 10px;
+   padding: 5px;
 }
 
 /* Show the dropdown menu when hovering over the parent <li> */
 .dropdown:hover .dropdown-menu {
    display: block;
+   color: black;
 }
    </style>
    <script src="js/modernizer.js"></script>
@@ -44,11 +49,11 @@
                      </div>
                      <div class="info-inner">
                         <span class="icontop"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                        <span class="iconcont"><a data-scroll href="mailto:info@yoursite.com">info@Lifecare.com</a></span>	
+                        <span class="iconcont"><a data-scroll href="mailto:info@yoursite.com">info@tumcare.com</a></span>	
                      </div>
                      <div class="info-inner">
                         <span class="icontop"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
-                        <span class="iconcont"><a data-scroll href="#">Daily: 7:00am - 8:00pm</a></span>	
+                        <span class="iconcont"><a data-scroll href="#">: 7:00am - 8:00pm</a></span>	
                      </div>
                   </div>
                </div>
@@ -63,10 +68,26 @@
 				  
                   <div id="navbar" class="navbar-collapse collapse">
                      <ul class="nav navbar-nav">
-                        <li><a class="active" href="index.html">Home</a></li>
-                        <li><a data-scroll href="#about">About us</a></li>
+                        <li class="dropdown"><a class="active" href="index.html">Home</a></li>
+                        <ul class="dropdown-menu">
+                           <li><a href="option1.html">Option 1</a></li>
+                           <li><a href="option2.html">Option 2</a></li>
+                        </ul>
+                     </li>
+                        <!-- <li><a data-scroll href="#about">About us</a></li> -->
+                         <li class="dropdown"><a data-scroll href="#about">About us</a>
+                           <ul class="dropdown-menu">
+                              <li><a href="option3.html">Option 3</a></li>
+                              <li><a href="option4.html">Option 4</a></li>
+                           </ul>
+                     </li>
                         <li><a data-scroll href="#service">Academics</a></li>
                         <li><a data-scroll href="#doctors">Portals</a></li>
+                        <ul class="dropdown-menu">
+                           <li><a href="option3.html">Students Portal</a></li>
+                           <li><a href="option4.html">Staff portal</a></li>
+                           <li><a href="option4.html">Admin portal</a></li>
+                        </ul>
                         <li><a data-scroll href="#price">Media Desk</a></li>
 						<li><a data-scroll href="#testimonials">Procurement</a></li>
                         <li><a data-scroll href="#getintouch">Contact</a></li>
@@ -83,7 +104,7 @@
 
 <div id="navbar" class="navbar-collapse collapse">
    <ul class="nav navbar-nav">
-      <li class="dropdown"><a class="active" href="index.html">Home</a>
+      <li class="dropdown"><a class="active" href="index.html">Home</a></li>
          <ul class="dropdown-menu">
             <li><a href="option1.html">Option 1</a></li>
             <li><a href="option2.html">Option 2</a></li>
@@ -94,7 +115,6 @@
          <ul class="dropdown-menu">
             <li><a href="option3.html">Option 3</a></li>
             <li><a href="option4.html">Option 4</a></li>
-            <!-- Add more options here if needed -->
          </ul>
       </li>
       <!-- Add more <li> elements here as needed -->
@@ -128,7 +148,7 @@
                   <div class="text-contant">
                      <h2>
                         <!-- <span class="center"><span class="icon"><img src="images/tum.png" alt="#" /></span></span> -->
-                        <a href="" class="typewrite" data-period="2000" data-type='[ "Welcome to the Technical University Of Mombasa", "Only University At Sea Level", "We are Expert!" ]'>
+                        <a href="" class="typewrite" data-period="2000" data-type='[ "Welcome to Technical University Of Mombasa", "The only Technical University At Sea Level", "We are the Technicians!" ]'>
                         <span class="wrap"></span>
                         </a>
                      </h2>
@@ -146,7 +166,7 @@
                <div class="row">
                   <div class="service-time one" style="background:#097B3E;">
                      <span class="info-icon"><i class="fa fa-ambulance" aria-hidden="true"></i></span>
-                     <h3>Emergency Case</h3>
+                     <h3>Students Admissions for September intake</h3>
                      <p>Dignissimos ducimus qui blanditii sentium volta tum deleniti atque cori as quos dolores et quas mole.</p>
                   </div>
                </div>
@@ -155,7 +175,7 @@
                <div class="row">
                   <div class="service-time middle" style="background:#097B3E;">
                      <span class="info-icon"><i class="fa fa-clock-o" aria-hidden="true"></i></span> 
-                     <h3>Working Hours</h3>
+                     <h3>Lecture Hours</h3>
                      <div class="time-table-section">
                         <ul>
                            <li><span class="left">Monday - Friday</span><span class="right">8.00 – 18.00</span></li>
@@ -170,7 +190,7 @@
                <div class="row">
                   <div class="service-time three" style="background:#097B3E;">
                      <span class="info-icon"><i class="fa fa-hospital-o" aria-hidden="true"></i></span>
-                     <h3>Clinic Timetable</h3>
+                     <h3>Students Registation Status</h3>
                      <p>Dignissimos ducimus qui blanditii sentium volta tum deleniti atque cori as quos dolores et quas mole.</p>
                   </div>
                </div>
@@ -188,7 +208,7 @@
                <div class="col-md-6">
                   <div class="message-box">
                      <h4>What We Do</h4>
-                     <h2>Clinic Service</h2>
+                     <h2>Service</h2>
                      <p class="lead">Quisque eget nisl id nulla sagittis auctor quis id. Aliquam quis vehicula enim, non aliquam risus. Sed a tellus quis mi rhoncus dignissim.</p>
                      <p> Integer rutrum ligula eu dignissim laoreet. Pellentesque venenatis nibh sed tellus faucibus bibendum. Sed fermentum est vitae rhoncus molestie. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.  </p>
                      <a href="#services" data-scroll class="btn btn-light btn-radius btn-brd grd1 effect-1">Learn More</a>
@@ -261,14 +281,14 @@
                      <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                         <div class="serv">
                            <span class="icon-service"><img src="images/service-icon1.png" alt="#" /></span>
-                           <h4>PREMIUM FACILITIES</h4>
+                           <h4>DIGITAL CENTER</h4>
                            <p>Lorem Ipsum is simply dummy text of the printing.</p>
                         </div>
                      </div>
                      <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                         <div class="serv">
                            <span class="icon-service"><img src="images/service-icon2.png" alt="#" /></span>
-                           <h4>LARGE LABORATORY</h4>
+                           <h4>E-LEARNING</h4>
                            <p>Lorem Ipsum is simply dummy text of the printing.</p>
                         </div>
                      </div>
@@ -282,7 +302,7 @@
                      <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                         <div class="serv">
                            <span class="icon-service"><img src="images/service-icon4.png" alt="#" /></span>
-                           <h4>CHILDREN CARE CENTER</h4>
+                           <h4>CENTER</h4>
                            <p>Lorem Ipsum is simply dummy text of the printing.</p>
                         </div>
                      </div>
@@ -618,7 +638,7 @@
                <div class="col-md-6 col-sm-12 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.6s">
                   <div class="testimonial clearfix">
                      <div class="desc">
-                        <h3><i class="fa fa-quote-left"></i> The amazing clinic! Wonderful Support!</h3>
+                        <h3><i class="fa fa-quote-left"></i> The Wonderful Support!</h3>
                         <p class="lead">They have got my project on time with the competition with a sed highly skilled, and experienced & professional team.</p>
                      </div>
                      <div class="testi-meta">
@@ -638,7 +658,7 @@
                      </div>
                      <div class="testi-meta">
                         <img src="images/testi_01.png" alt="" class="img-responsive alignleft">
-                        <h4>Martin Johnson <small>- Founder of Goosilo</small></h4>
+                        <h4>SolTheme <small>- Founder of SolTheme</small></h4>
                      </div>
                      <!-- end testi-meta -->
                   </div>
@@ -702,21 +722,21 @@
                <div class="col-md-4">
                   <div class="logo padding">
                      <a href=""><img src="images/tum.png" alt=""></a>
-                     <p>Locavore pork belly scen ester pine est chill wave microdosing pop uple itarian cliche artisan.</p>
+                     <p>Technical University is the only technical University at sea level.</p>
                   </div>
                </div>
                <div class="col-md-4">
                   <div class="footer-info padding">
                      <h3>CONTACT US</h3>
-                     <p><i class="fa fa-map-marker" aria-hidden="true"></i> PO Box 16122 Collins Street West Victoria 8007 Australia</p>
-                     <p><i class="fa fa-paper-plane" aria-hidden="true"></i> info@gmail.com</p>
-                     <p><i class="fa fa-phone" aria-hidden="true"></i> (+1) 800 123 456</p>
+                     <p><i class="fa fa-map-marker" aria-hidden="true"></i> PO Box 80100 Tudor Mombasa</p>
+                     <p><i class="fa fa-paper-plane" aria-hidden="true"></i> info@tum.ac.ke</p>
+                     <p><i class="fa fa-phone" aria-hidden="true"></i>+254 702754864</p>
                   </div>
                </div>
                <div class="col-md-4">
                   <div class="subcriber-info">
                      <h3>SUBSCRIBE</h3>
-                     <p>Get healthy news, tip and solutions to your problems from our experts.</p>
+                     <p>Get placement tips and solutions to your problems from our experts.</p>
                      <div class="subcriber-box">
                         <form id="mc-form" class="mc-form">
                            <div class="newsletter-form">
@@ -746,7 +766,7 @@
             <div class="row">
                <div class="col-md-8">
                   <div class="footer-text">
-                     <p>© 2018. Distributed by <a id="tw" href="https://themewagon.com/" target="_blank">ThemeWagon</a></p>
+                     <p>© 2023. Distributed by <a id="tw" href="https://themewagon.com/" target="_blank">SolWagon</a></p>
                   </div>
                </div>
                <div class="col-md-4">
