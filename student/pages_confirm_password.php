@@ -19,8 +19,8 @@ if(isset($_POST['confirm-reset-password'])){
         $err = "confirmation password cannot be empty";
     }
     if(!$error){
-        $email = $_SESSION['email'];
-        $sel = "SELECT * FROM ib_clients WHERE email = '$email'";
+        $adm = $_SESSION['adm'];
+        $sel = "SELECT * FROM student WHERE adm = '$adm'";
         $res = mysqli_query($mysqli, $sel);
         if(mysqli_num_rows($res) > 0){
             $row = mysqli_fetch_assoc($res);
@@ -29,10 +29,10 @@ if(isset($_POST['confirm-reset-password'])){
                 $err = "Password does not match";
             }
             else{
-                $email = $_SESSION['email'];
-                $upd = "UPDATE ib_clients SET password = ? WHERE email = ?";
+                $adm = $_SESSION['adm'];
+                $upd = "UPDATE student SET password = ? WHERE adm = ?";
                 $stmt = $mysqli ->prepare($upd);
-                $rc = $stmt->bind_param('ss',$new_password,$email);
+                $rc = $stmt->bind_param('ss',$new_password,$adm);
                 $stmt->execute();
                 if($stmt){
                     $success = "Password has changed" && header("refresh:1; url = pages_client_index.php");
@@ -65,8 +65,8 @@ while ($auth = $res->fetch_object()){
     <div class="card">
         <div class="card-body login-card-body">
             <?php 
-            $email = $_SESSION['email'];
-            $sel = "SELECT * FROM ib_clients WHERE email = '$email'";
+            $adm = $_SESSION['adm'];
+            $sel = "SELECT * FROM student WHERE adm = '$adm'";
             $stmt = $mysqli -> prepare($sel);
             $stmt -> execute();
             $ret = $stmt -> get_result();

@@ -3,9 +3,9 @@ session_start();
 include('conf/config.php');
 include('conf/checklogin.php');
 check_login();
-$client_id = $_SESSION['client_id'];
+$student_id = $_SESSION['student_id'];
 
-$sel = "SELECT count(*) FROM `ib_clients`";
+$sel = "SELECT count(*) FROM `student`";
 $stmt = $mysqli->prepare($sel);
 $stmt->execute();
 $stmt->bind_result($iBClients);
@@ -33,37 +33,37 @@ $stmt->bind_result($iB_Accs);
 $stmt->fetch();
 $stmt->close();
 
-$client_id = $_SESSION['client_id'];
-$sel = "SELECT SUM(transaction_amt) FROM `ib_transactions` WHERE client_id = ? AND tr_type = 'Deposit'";
+$student_id = $_SESSION['student_id'];
+$sel = "SELECT SUM(transaction_amt) FROM `ib_transactions` WHERE student_id = ? AND tr_type = 'Deposit'";
 $stmt = $mysqli->prepare($sel);
-$stmt->bind_param('i', $client_id);
+$stmt->bind_param('i', $student_id);
 $stmt->execute();
 $stmt->bind_result($iB_deposits);
 $stmt->fetch();
 $stmt->close();
 
-$client_id = $_SESSION['client_id'];
-$sel = "SELECT SUM(transaction_amt) FROM `ib_transactions` WHERE `client_id` = ? AND tr_type = 'Withdrawal'";
+$student_id = $_SESSION['student_id'];
+$sel = "SELECT SUM(transaction_amt) FROM `ib_transactions` WHERE `student_id` = ? AND tr_type = 'Withdrawal'";
 $stmt = $mysqli->prepare($sel);
-$stmt->bind_param('i', $client_id);
+$stmt->bind_param('i', $student_id);
 $stmt->execute();
 $stmt->bind_result($iB_withdrawal);
 $stmt->fetch();
 $stmt->close();
 
-$client_id = $_SESSION['client_id'];
-$sel = "SELECT SUM(transaction_amt) FROM `ib_transactions` WHERE `client_id` = ? AND tr_type = 'Transfers'";
+$student_id = $_SESSION['student_id'];
+$sel = "SELECT SUM(transaction_amt) FROM `ib_transactions` WHERE `student_id` = ? AND tr_type = 'Transfers'";
 $stmt = $mysqli->prepare($sel);
-$stmt->bind_param('i',$client_id);
+$stmt->bind_param('i',$student_id);
 $stmt->execute();
 $stmt->bind_result($iB_Transfers);
 $stmt->fetch();
 $stmt->close();
 
-$client_id = $_SESSION['client_id'];
-$sel = "SELECT SUM(transaction_amt) FROM `ib_transactions` WHERE `client_id` = ?";
+$student_id = $_SESSION['student_id'];
+$sel = "SELECT SUM(transaction_amt) FROM `ib_transactions` WHERE `student_id` = ?";
 $stmt = $mysqli->prepare($sel);
-$stmt->bind_param('i', $client_id);
+$stmt->bind_param('i', $student_id);
 $stmt->execute();
 $stmt->bind_result($acc_amt);
 $stmt->fetch();
@@ -71,10 +71,10 @@ $stmt->close();
 
 $TotalBalInAccount = (($iB_deposits)) - (($iB_Transfers)+($iB_withdrawal));
 
-$client_id = $_SESSION['client_id'];
-$sel = "SELECT SUM(transaction_amt) FROM `ib_transactions` WHERE `client_id` = ?";
+$student_id = $_SESSION['student_id'];
+$sel = "SELECT SUM(transaction_amt) FROM `ib_transactions` WHERE `student_id` = ?";
 $stmt = $mysqli -> prepare($sel);
-$stmt ->bind_param('i', $client_id);
+$stmt ->bind_param('i', $student_id);
 $stmt ->execute();
 $stmt->bind_result($new_amt);
 $stmt->fetch();
@@ -87,34 +87,24 @@ $stmt->close();
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
 
   <div class="wrapper">
-    <!-- Navbar -->
 <?php include("dist/_partials/nav.php"); ?>
-    <!-- /.navbar -->
-
-    <!-- Main Sidebar Container -->
 <?php include("dist/_partials/sidebar.php"); ?>
-
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
       <div class="content-header">
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
               <h1 class="m-0 text-dark">Client Dashboard</h1>
-            </div><!-- /.col -->
+            </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                 <li class="breadcrumb-item active">Dashboard</li>
               </ol>
-            </div><!-- /.col -->
-          </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
+            </div>
+          </div>
+        </div>
       </div>
-      <!-- /.content-header -->
-
-      <!-- Main content -->
       <section class="content">
         <div class="container-fluid">
           <div class="row">
@@ -130,9 +120,6 @@ $stmt->close();
                 </div>
               </div>
             </div>
-            <!----./ iBank Deposits-->
-
-            <!--iBank Withdrwals-->
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
                 <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-download"></i></span>
@@ -143,12 +130,8 @@ $stmt->close();
                 </div>
               </div>
             </div>
-            <!-- Withdrawals-->
-
-            <!-- fix for small devices only -->
             <div class="clearfix hidden-md-up"></div>
 
-            <!--Transfers-->
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
                 <span class="info-box-icon bg-success elevation-1"><i class="fas fa-random"></i></span>
@@ -158,9 +141,6 @@ $stmt->close();
                 </div>
               </div>
             </div>
-            <!-- /.Transfers-->
-
-            <!--Balances-->
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
                 <span class="info-box-icon bg-purple elevation-1"><i class="fas fa-money-bill-alt"></i></span>
@@ -170,7 +150,6 @@ $stmt->close();
                 </div>
               </div>
             </div>
-            <!-- ./Balances-->
           </div>
 
           <div class="row">
@@ -187,29 +166,22 @@ $stmt->close();
                     </button>
                   </div>
                 </div>
-                <!-- /.card-header -->
                 <div class="card-body">
                   <div class="row">
                     <div class="col-md-6">
                       <div class="chart">
-                        <!-- Transaction Donought chart Canvas -->
                         <div id="PieChart" class="col-md-6" style="height: 400px; max-width: 500px; margin: 0px auto;"></div>
                       </div>
-                      <!-- /.chart-responsive -->
                     </div>
                     <hr>
                     <div class="col-md-6">
                       <div class="chart">
                         <div id="AccountsPerAccountCategories" class="col-md-6" style="height: 400px; max-width: 500px; margin: 0px auto;"></div>
                       </div>
-                      <!-- /.chart-responsive -->
                     </div>
 
-                    <!-- /.col -->
                   </div>
-                  <!-- /.row -->
-                </div><!-- Log on to codeastro.com for more projects! -->
-                <!-- ./card-body -->
+                </div>
                 <div class="card-footer">
                   <div class="row">
                     <div class="col-sm-3 col-6">
@@ -217,48 +189,32 @@ $stmt->close();
                         <h5 class="description-header">Kshs. <?php echo $iB_deposits; ?></h5>
                         <span class="description-text">TOTAL DEPOSITS</span>
                       </div>
-                      <!-- /.description-block -->
                     </div>
-                    <!-- /.col -->
                     <div class="col-sm-3 col-6">
                       <div class="description-block border-right">
                         <h5 class="description-header">Kshs. <?php echo $iB_withdrawal; ?></h5>
                         <span class="description-text">TOTAL WITHDRAWALS</span>
                       </div>
-                      <!-- /.description-block -->
                     </div>
-                    <!-- /.col -->
                     <div class="col-sm-3 col-6">
                       <div class="description-block border-right">
                         <h5 class="description-header">Kshs. <?php echo $iB_Transfers; ?> </h5>
                         <span class="description-text">TOTAL TRANSFERS</span>
                       </div>
-                      <!-- /.description-block -->
                     </div>
-                    <!-- /.col -->
                     <div class="col-sm-3 col-6">
                       <div class="description-block">
                         <h5 class="description-header">Kshs. <?php echo $new_amt; ?> </h5>
                         <span class="description-text">TOTAL MONEY IN  Account</span>
                       </div>
-                      <!-- /.description-block -->
                     </div>
                   </div>
-                  <!-- /.row -->
                 </div>
-                <!-- /.card-footer -->
               </div>
-              <!-- /.card -->
             </div>
-            <!-- /.col -->
           </div>
-          <!-- /.row -->
-
-          <!-- Main row -->
           <div class="row">
-            <!-- Left col -->
             <div class="col-md-12">
-              <!-- TABLE: Transactions -->
               <div class="card">
                 <div class="card-header border-transparent">
                   <h3 class="card-title">Latest Transactions</h3>
@@ -288,20 +244,15 @@ $stmt->close();
                       </thead>
                       <tbody>
                         <?php
-                        //Get latest transactions ;
-                        $client_id = $_SESSION['client_id'];
-                        $ret = "SELECT * FROM ib_transactions WHERE  client_id = ?  ORDER BY ib_transactions. created_at DESC ";
+                        $student_id = $_SESSION['student_id'];
+                        $ret = "SELECT * FROM ib_transactions WHERE  student_id = ?  ORDER BY ib_transactions. created_at DESC ";
                         $stmt = $mysqli->prepare($ret);
-                        $stmt->bind_param('i', $client_id);
+                        $stmt->bind_param('i', $student_id);
                         $stmt->execute(); //ok
                         $res = $stmt->get_result();
                         $cnt = 1;
                         while ($row = $res->fetch_object()) {
-                          /* Trim Transaction Timestamp to 
-                            *  User Uderstandable Formart  DD-MM-YYYY :
-                            */
                           $transTstamp = $row->created_at;
-                          //Perfom some lil magic here
                           if ($row->tr_type == 'Deposit') {
                             $alertClass = "<span class='badge badge-success'>$row->tr_type</span>";
                           } elseif ($row->tr_type == 'Withdrawal') {
@@ -324,29 +275,18 @@ $stmt->close();
                       </tbody>
                     </table>
                   </div>
-                  <!-- /.table-responsive -->
                 </div>
-                <!-- /.card-body -->
                 <div class="card-footer clearfix">
                   <a href="pages_transactions_engine.php" class="btn btn-sm btn-info float-left">View All</a>
                 </div>
-                <!-- /.card-footer -->
               </div>
-              <!-- /.card -->
             </div>
-            <!-- /.col -->
           </div>
-          <!-- /.row -->
         </div>
-        <!--/. container-fluid -->
       </section>
-      <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
 
-    <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
     </aside>
     <!-- /.control-sidebar -->
 
@@ -405,10 +345,10 @@ $stmt->close();
           dataPoints: [{
               y: <?php
                   //return total number of accounts opened under savings acc type
-                  $client_id = $_SESSION['client_id'];
-                  $result = "SELECT count(*) FROM iB_bankAccounts WHERE  acc_type ='Savings' AND client_id =? ";
+                  $student_id = $_SESSION['student_id'];
+                  $result = "SELECT count(*) FROM iB_bankAccounts WHERE  acc_type ='Savings' AND student_id =? ";
                   $stmt = $mysqli->prepare($result);
-                  $stmt->bind_param('i', $client_id);
+                  $stmt->bind_param('i', $student_id);
                   $stmt->execute();
                   $stmt->bind_result($savings);
                   $stmt->fetch();
@@ -422,10 +362,10 @@ $stmt->close();
             {
               y: <?php
                   //return total number of accounts opened under  Retirement  acc type
-                  $client_id  = $_SESSION['client_id'];
-                  $result = "SELECT count(*) FROM iB_bankAccounts WHERE  acc_type =' Retirement' AND client_id =? ";
+                  $student_id  = $_SESSION['student_id'];
+                  $result = "SELECT count(*) FROM iB_bankAccounts WHERE  acc_type =' Retirement' AND student_id =? ";
                   $stmt = $mysqli->prepare($result);
-                  $stmt->bind_param('i', $client_id);
+                  $stmt->bind_param('i', $student_id);
                   $stmt->execute();
                   $stmt->bind_result($Retirement);
                   $stmt->fetch();
@@ -439,10 +379,10 @@ $stmt->close();
             {
               y: <?php
                   //return total number of accounts opened under  Recurring deposit  acc type
-                  $client_id  = $_SESSION['client_id'];
-                  $result = "SELECT count(*) FROM iB_bankAccounts WHERE  acc_type ='Recurring deposit' AND client_id =? ";
+                  $student_id  = $_SESSION['student_id'];
+                  $result = "SELECT count(*) FROM iB_bankAccounts WHERE  acc_type ='Recurring deposit' AND student_id =? ";
                   $stmt = $mysqli->prepare($result);
-                  $stmt->bind_param('i', $client_id);
+                  $stmt->bind_param('i', $student_id);
                   $stmt->execute();
                   $stmt->bind_result($Recurring);
                   $stmt->fetch();
@@ -456,10 +396,10 @@ $stmt->close();
             {
               y: <?php
                   //return total number of accounts opened under  Fixed Deposit Account deposit  acc type
-                  $client_id  = $_SESSION['client_id'];
-                  $result = "SELECT count(*) FROM iB_bankAccounts WHERE  acc_type ='Fixed Deposit Account' AND client_id = ? ";
+                  $student_id  = $_SESSION['student_id'];
+                  $result = "SELECT count(*) FROM iB_bankAccounts WHERE  acc_type ='Fixed Deposit Account' AND student_id = ? ";
                   $stmt = $mysqli->prepare($result);
-                  $stmt->bind_param('i', $client_id);
+                  $stmt->bind_param('i', $student_id);
                   $stmt->execute();
                   $stmt->bind_result($Fixed);
                   $stmt->fetch();
@@ -474,10 +414,10 @@ $stmt->close();
               y: <?php
 
                   //return total number of accounts opened under  Current account deposit  acc type
-                  $client_id  = $_SESSION['client_id'];
-                  $result = "SELECT count(*) FROM iB_bankAccounts WHERE  acc_type ='Current account' AND client_id =? ";
+                  $student_id  = $_SESSION['student_id'];
+                  $result = "SELECT count(*) FROM iB_bankAccounts WHERE  acc_type ='Current account' AND student_id =? ";
                   $stmt = $mysqli->prepare($result);
-                  $stmt->bind_param('i', $client_id);
+                  $stmt->bind_param('i', $student_id);
                   $stmt->execute();
                   $stmt->bind_result($Current);
                   $stmt->fetch();
@@ -509,10 +449,10 @@ $stmt->close();
           dataPoints: [{
               y: <?php
                   //return total number of transactions under  Withdrawals
-                  $client_id  = $_SESSION['client_id'];
-                  $result = "SELECT count(*) FROM iB_Transactions WHERE  tr_type ='Withdrawal' AND client_id =? ";
+                  $student_id  = $_SESSION['student_id'];
+                  $result = "SELECT count(*) FROM iB_Transactions WHERE  tr_type ='Withdrawal' AND student_id =? ";
                   $stmt = $mysqli->prepare($result);
-                  $stmt->bind_param('i', $client_id);
+                  $stmt->bind_param('i', $student_id);
                   $stmt->execute();
                   $stmt->bind_result($Withdrawals);
                   $stmt->fetch();
@@ -526,10 +466,10 @@ $stmt->close();
             {
               y: <?php
                   //return total number of transactions under  Deposits
-                  $client_id  = $_SESSION['client_id'];
-                  $result = "SELECT count(*) FROM iB_Transactions WHERE  tr_type ='Deposit' AND client_id =? ";
+                  $student_id  = $_SESSION['student_id'];
+                  $result = "SELECT count(*) FROM iB_Transactions WHERE  tr_type ='Deposit' AND student_id =? ";
                   $stmt = $mysqli->prepare($result);
-                  $stmt->bind_param('i', $client_id);
+                  $stmt->bind_param('i', $student_id);
                   $stmt->execute();
                   $stmt->bind_result($Deposits);
                   $stmt->fetch();
@@ -543,10 +483,10 @@ $stmt->close();
             {
               y: <?php
                   //return total number of transactions under  Deposits
-                  $client_id  = $_SESSION['client_id'];
-                  $result = "SELECT count(*) FROM iB_Transactions WHERE  tr_type ='Transfer' AND client_id =? ";
+                  $student_id  = $_SESSION['student_id'];
+                  $result = "SELECT count(*) FROM iB_Transactions WHERE  tr_type ='Transfer' AND student_id =? ";
                   $stmt = $mysqli->prepare($result);
-                  $stmt->bind_param('i', $client_id);
+                  $stmt->bind_param('i', $student_id);
                   $stmt->execute();
                   $stmt->bind_result($Transfers);
                   $stmt->fetch();
