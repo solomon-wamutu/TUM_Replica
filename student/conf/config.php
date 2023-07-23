@@ -2,7 +2,7 @@
 $dbuser = "root";
 $dbpass = "";
 $dbhost = "localhost";
-$db = "onlinebank";
+$db = "tum";
 $mysqli = new mysqli($dbhost,$dbuser,$dbpass,$db);
 
 // if ($mysqli->connect_error) {

@@ -27,8 +27,8 @@ $profile_pic = $_POST['profile_pic'];
         <div class="content-wrapper">
 
 <?php
-$client_id = $_SESSION['client_id'];
-$sel = "SELECT * FROM `ib_clients` where client_id = ?";
+$student_id = $_SESSION['student_id'];
+$sel = "SELECT * FROM `student` where student_id = ?";
 $stmt = $mysqli->prepare($sel);
 $stmt->execute();
 $res = $stmt->get_result();
