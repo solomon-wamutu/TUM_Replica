@@ -3,30 +3,30 @@ session_start();
 include('./conf/config.php');
 if(isset($_POST['reset_password'])){
     $error = 0;
-    if(isset($_POST['email']) && !empty($_POST['email'])){
-        $email = mysqli_real_escape_string($mysqli, trim($_POST['email']));
+    if(isset($_POST['adm']) && !empty($_POST['adm'])){
+        $adm = mysqli_real_escape_string($mysqli, trim($_POST['adm']));
     }
     else{
     $error = 1;
-    $err = "Enter your email address";
+    $err = "Enter your adm address";
     }
      
-    if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
-        $err = "Invalid email address";
+    if(!filter_var($_POST['adm'], FILTER_VALIDATE_EMAIL)){
+        $err = "Invalid adm address";
     }
-    $checkEmail = mysqli_query($mysqli, "SELECT `email` FROM `ib_clients` WHERE `email` = '" . $_POST['email'] . "'") or exit(mysqli_error($mysqli));
+    $checkadm = mysqli_query($mysqli, "SELECT `adm` FROM `student` WHERE `adm` = '" . $_POST['adm'] . "'") or exit(mysqli_error($mysqli));
 
-    if (mysqli_num_rows($checkEmail) > 0) {
+    if (mysqli_num_rows($checkadm) > 0) {
 
         $n = date('y');
         $new_password = bin2hex(random_bytes($n));
         //Insert Captured information to a database table
-        $query = "UPDATE ib_clients SET  password=? WHERE email =?";
+        $query = "UPDATE student SET  password=? WHERE adm =?";
         $stmt = $mysqli->prepare($query);
         //bind paramaters
-        $rc = $stmt->bind_param('ss', $new_password, $email);
+        $rc = $stmt->bind_param('ss', $new_password, $adm);
         $stmt->execute();
-        $_SESSION['email'] = $email;
+        $_SESSION['adm'] = $adm;
     
         if ($stmt) {
           /* Alert */
@@ -36,7 +36,7 @@ if(isset($_POST['reset_password'])){
         }
       } else  // user does not exist
       {
-        $err = "Email Does Not Exist";
+        $err = "adm Does Not Exist";
       }
 }
 
@@ -62,7 +62,7 @@ while ($auth = $res->fetch_object()) {
 
                     <form method="POST">
             <div class="input-group mb-3">
-              <input type="email" name="email" class="form-control" placeholder="Email" required>
+              <input type="text" name="adm" class="form-control" placeholder="adm" required>
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-envelope"></span>

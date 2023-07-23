@@ -12,73 +12,73 @@ $stmt->bind_result($iBClients);
 $stmt->fetch();
 $stmt->close();
 
-$sel = "SELECT count(*) FROM `ib_staff`";
-$stmt = $mysqli->prepare($sel);
-$stmt->execute();
-$stmt->bind_result($iBStaff);
-$stmt->fetch();
-$stmt->close();
+// $sel = "SELECT count(*) FROM `ib_staff`";
+// $stmt = $mysqli->prepare($sel);
+// $stmt->execute();
+// $stmt->bind_result($iBStaff);
+// $stmt->fetch();
+// $stmt->close();
 
-$sel = "SELECT count(*) FROM `ib_acc_types`";
-$stmt = $mysqli->prepare($sel);
-$stmt->execute();
-$stmt->bind_result($iB_AccType);
-$stmt->fetch();
-$stmt->close();
+// $sel = "SELECT count(*) FROM `ib_acc_types`";
+// $stmt = $mysqli->prepare($sel);
+// $stmt->execute();
+// $stmt->bind_result($iB_AccType);
+// $stmt->fetch();
+// $stmt->close();
 
-$sel = "SELECT count(*) FROM `ib_bankaccounts`";
-$stmt = $mysqli->prepare($sel);
-$stmt->execute();
-$stmt->bind_result($iB_Accs);
-$stmt->fetch();
-$stmt->close();
+// $sel = "SELECT count(*) FROM `ib_bankaccounts`";
+// $stmt = $mysqli->prepare($sel);
+// $stmt->execute();
+// $stmt->bind_result($iB_Accs);
+// $stmt->fetch();
+// $stmt->close();
 
-$student_id = $_SESSION['student_id'];
-$sel = "SELECT SUM(transaction_amt) FROM `ib_transactions` WHERE student_id = ? AND tr_type = 'Deposit'";
-$stmt = $mysqli->prepare($sel);
-$stmt->bind_param('i', $student_id);
-$stmt->execute();
-$stmt->bind_result($iB_deposits);
-$stmt->fetch();
-$stmt->close();
+// $student_id = $_SESSION['student_id'];
+// $sel = "SELECT SUM(transaction_amt) FROM `ib_transactions` WHERE student_id = ? AND tr_type = 'Deposit'";
+// $stmt = $mysqli->prepare($sel);
+// $stmt->bind_param('i', $student_id);
+// $stmt->execute();
+// $stmt->bind_result($iB_deposits);
+// $stmt->fetch();
+// $stmt->close();
 
-$student_id = $_SESSION['student_id'];
-$sel = "SELECT SUM(transaction_amt) FROM `ib_transactions` WHERE `student_id` = ? AND tr_type = 'Withdrawal'";
-$stmt = $mysqli->prepare($sel);
-$stmt->bind_param('i', $student_id);
-$stmt->execute();
-$stmt->bind_result($iB_withdrawal);
-$stmt->fetch();
-$stmt->close();
+// $student_id = $_SESSION['student_id'];
+// $sel = "SELECT SUM(transaction_amt) FROM `ib_transactions` WHERE `student_id` = ? AND tr_type = 'Withdrawal'";
+// $stmt = $mysqli->prepare($sel);
+// $stmt->bind_param('i', $student_id);
+// $stmt->execute();
+// $stmt->bind_result($iB_withdrawal);
+// $stmt->fetch();
+// $stmt->close();
 
-$student_id = $_SESSION['student_id'];
-$sel = "SELECT SUM(transaction_amt) FROM `ib_transactions` WHERE `student_id` = ? AND tr_type = 'Transfers'";
-$stmt = $mysqli->prepare($sel);
-$stmt->bind_param('i',$student_id);
-$stmt->execute();
-$stmt->bind_result($iB_Transfers);
-$stmt->fetch();
-$stmt->close();
+// $student_id = $_SESSION['student_id'];
+// $sel = "SELECT SUM(transaction_amt) FROM `ib_transactions` WHERE `student_id` = ? AND tr_type = 'Transfers'";
+// $stmt = $mysqli->prepare($sel);
+// $stmt->bind_param('i',$student_id);
+// $stmt->execute();
+// $stmt->bind_result($iB_Transfers);
+// $stmt->fetch();
+// $stmt->close();
 
-$student_id = $_SESSION['student_id'];
-$sel = "SELECT SUM(transaction_amt) FROM `ib_transactions` WHERE `student_id` = ?";
-$stmt = $mysqli->prepare($sel);
-$stmt->bind_param('i', $student_id);
-$stmt->execute();
-$stmt->bind_result($acc_amt);
-$stmt->fetch();
-$stmt->close();
+// $student_id = $_SESSION['student_id'];
+// $sel = "SELECT SUM(transaction_amt) FROM `ib_transactions` WHERE `student_id` = ?";
+// $stmt = $mysqli->prepare($sel);
+// $stmt->bind_param('i', $student_id);
+// $stmt->execute();
+// $stmt->bind_result($acc_amt);
+// $stmt->fetch();
+// $stmt->close();
 
-$TotalBalInAccount = (($iB_deposits)) - (($iB_Transfers)+($iB_withdrawal));
+// $TotalBalInAccount = (($iB_deposits)) - (($iB_Transfers)+($iB_withdrawal));
 
-$student_id = $_SESSION['student_id'];
-$sel = "SELECT SUM(transaction_amt) FROM `ib_transactions` WHERE `student_id` = ?";
-$stmt = $mysqli -> prepare($sel);
-$stmt ->bind_param('i', $student_id);
-$stmt ->execute();
-$stmt->bind_result($new_amt);
-$stmt->fetch();
-$stmt->close();
+// $student_id = $_SESSION['student_id'];
+// $sel = "SELECT SUM(transaction_amt) FROM `ib_transactions` WHERE `student_id` = ?";
+// $stmt = $mysqli -> prepare($sel);
+// $stmt ->bind_param('i', $student_id);
+// $stmt ->execute();
+// $stmt->bind_result($new_amt);
+// $stmt->fetch();
+// $stmt->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -94,7 +94,7 @@ $stmt->close();
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0 text-dark">Client Dashboard</h1>
+              <h1 class="m-0 text-dark">Student Dashboard</h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
@@ -115,7 +115,6 @@ $stmt->close();
                 <div class="info-box-content">
                   <span class="info-box-text">Deposits</span>
                   <span class="info-box-number">
-                    Kshs. <?php echo $iB_deposits; ?>
                   </span>
                 </div>
               </div>
@@ -126,7 +125,7 @@ $stmt->close();
 
                 <div class="info-box-content">
                   <span class="info-box-text">Withdrawals</span>
-                  <span class="info-box-number">Kshs. <?php echo $iB_withdrawal; ?> </span>
+                  <span class="info-box-number"> </span>
                 </div>
               </div>
             </div>
@@ -137,7 +136,7 @@ $stmt->close();
                 <span class="info-box-icon bg-success elevation-1"><i class="fas fa-random"></i></span>
                 <div class="info-box-content">
                   <span class="info-box-text">Transfers</span>
-                  <span class="info-box-number">Kshs. <?php echo $iB_Transfers; ?></span>
+                  <span class="info-box-number"></span>
                 </div>
               </div>
             </div>
@@ -146,7 +145,7 @@ $stmt->close();
                 <span class="info-box-icon bg-purple elevation-1"><i class="fas fa-money-bill-alt"></i></span>
                 <div class="info-box-content">
                   <span class="info-box-text">Wallet Balance</span>
-                  <span class="info-box-number">Kshs. <?php echo $TotalBalInAccount; ?></span>
+                  <span class="info-box-number"></span>
                 </div>
               </div>
             </div>
@@ -186,25 +185,25 @@ $stmt->close();
                   <div class="row">
                     <div class="col-sm-3 col-6">
                       <div class="description-block border-right">
-                        <h5 class="description-header">Kshs. <?php echo $iB_deposits; ?></h5>
+                        <h5 class="description-header"></h5>
                         <span class="description-text">TOTAL DEPOSITS</span>
                       </div>
                     </div>
                     <div class="col-sm-3 col-6">
                       <div class="description-block border-right">
-                        <h5 class="description-header">Kshs. <?php echo $iB_withdrawal; ?></h5>
+                        <h5 class="description-header"></h5>
                         <span class="description-text">TOTAL WITHDRAWALS</span>
                       </div>
                     </div>
                     <div class="col-sm-3 col-6">
                       <div class="description-block border-right">
-                        <h5 class="description-header">Kshs. <?php echo $iB_Transfers; ?> </h5>
+                        <h5 class="description-header"> </h5>
                         <span class="description-text">TOTAL TRANSFERS</span>
                       </div>
                     </div>
                     <div class="col-sm-3 col-6">
                       <div class="description-block">
-                        <h5 class="description-header">Kshs. <?php echo $new_amt; ?> </h5>
+                        <h5 class="description-header"> </h5>
                         <span class="description-text">TOTAL MONEY IN  Account</span>
                       </div>
                     </div>
