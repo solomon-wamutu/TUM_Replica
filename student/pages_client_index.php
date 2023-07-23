@@ -1,18 +1,18 @@
 <?php
 session_start();
-include('conf/config.php'); //get configuration file
+include('conf/config.php'); 
 if (isset($_POST['login'])) {
-  $email = $_POST['email'];
-  $password = sha1(md5($_POST['password'])); //double encrypt to increase security
-  $stmt = $mysqli->prepare("SELECT email, password, client_id  FROM ib_clients   WHERE email=? AND password=?"); //sql to log in user
-  $stmt->bind_param('ss', $email, $password); //bind fetched parameters
-  $stmt->execute(); //execute bind
-  $stmt->bind_result($email, $password, $client_id); //bind result
+  $adm = $_POST['adm'];
+  $password = sha1(md5($_POST['password'])); 
+  $stmt = $mysqli->prepare("SELECT adm, password, student_id  FROM student  WHERE adm=? AND password=?");
+  $stmt->bind_param('ss', $adm, $password);
+  $stmt->execute(); 
+  $stmt->bind_result($adm, $password, $student_id); 
   $rs = $stmt->fetch();
-  $_SESSION['client_id'] = $client_id; //assaign session toc lient id
+  $_SESSION['student_id'] = $student_id;
   $uip=$_SERVER['REMOTE_ADDR'];
   $ldate=date('d/m/Y h:i:s', time());
-  if ($rs) { //if its sucessfull
+  if ($rs) { 
     $success = "successfully logged in";
     header("location:pages_dashboard.php");
     
@@ -21,7 +21,6 @@ if (isset($_POST['login'])) {
     $err = "Access Denied Please Check Your Credentials";
   }
 }
-/* Persisit System Settings On Brand */
 $ret = "SELECT * FROM `ib_systemsettings` ";
 $stmt = $mysqli->prepare($ret);
 $stmt->execute(); //ok
@@ -38,14 +37,13 @@ while ($auth = $res->fetch_object()) {
       <div class="login-logo">
         <p><?php echo $auth->sys_name; ?></p>
       </div>
-      <!-- /.login-logo -->
       <div class="card">
         <div class="card-body login-card-body">
-          <p class="login-box-msg">Log In To Start Client Session</p>
+          <p class="login-box-msg">Log In To Start Session</p>
 
           <form method="post">
             <div class="input-group mb-3">
-              <input type="email" name="email" class="form-control" placeholder="Email">
+              <input type="adm" name="adm" class="form-control" placeholder="adm">
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-envelope"></span>
@@ -69,16 +67,13 @@ while ($auth = $res->fetch_object()) {
                   </label>
                 </div>
               </div>
-              <!-- /.col -->
               <div class="col-4">
                 <button type="submit" name="login" class="btn btn-success btn-block">Log In</button>
               </div>
-              <!-- /.col -->
             </div>
           </form>
 
 
-          <!-- /.social-auth-links -->
 
            <p class="mb-1">
             <a href="pages_reset_pwd.php">I forgot my password</a>
@@ -90,16 +85,10 @@ while ($auth = $res->fetch_object()) {
           </p>
 
         </div>
-        <!-- /.login-card-body -->
       </div>
     </div>
-    <!-- /.login-box -->
-
-    <!-- jQuery -->
     <script src="plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
     <script src="plugins/bootstrap/j/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
     <script src="dist/js/adminlte.min.js"></script>
 
   </body>

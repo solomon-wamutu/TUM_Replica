@@ -1,5 +1,5 @@
 <?php
-include('../client/conf/config.php');
+include('../student/conf/config.php');
 /* Persisit System Settings On Brand */
 $ret = "SELECT * FROM `ib_systemsettings` ";
 $stmt = $mysqli->prepare($ret);

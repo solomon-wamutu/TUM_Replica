@@ -18,17 +18,12 @@ $profile_pic = $_POST['profile_pic'];
 <html>
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <?php include("dist/_partials/head.php"); ?>
-<!-- Log on to codeastro.com for more projects! -->
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed ">
     <div class="wrapper">
         <!-- Navbar -->
         <?php include("dist/_partials/nav.php"); ?>
-        <!-- /.navbar -->
-
-        <!-- Main Sidebar Container -->
+        
         <?php include("dist/_partials/sidebar.php"); ?>
-
-        <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
 
 <?php

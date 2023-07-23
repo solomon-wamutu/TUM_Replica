@@ -7,13 +7,13 @@ if(isset($_POST['create_account'])){
     $national_id = $_POST['national_id'];
     $client_number = $_POST['client_number'];
     $phone = $_POST['phone'];
-    $email = $_POST['email'];
+    $adm = $_POST['adm'];
     $password = sha1(md5($_POST['password']));
     $address = $_POST['address'];
     $profile_pic = $_POST['profile_pic'];
     // move_uploaded_file($_POST["profile_pic"]["tmp_name"],"dist/img/".$_FILES["profile_pic"]);
 
-  $sel = "SELECT * FROM ib_clients WHERE name = ?";
+  $sel = "SELECT * FROM student WHERE name = ?";
   $stmt = $mysqli ->prepare($sel);
   $stmt->bind_param("s", $name);
   $stmt->execute();
@@ -26,14 +26,13 @@ if(isset($_POST['create_account'])){
   // $stmt->execute();
   }
 else{
-$ins = "INSERT INTO `ib_clients` (name, national_id,client_number, phone, email, password, address,profile_pic) VALUES (?,?,?,?,?,?,?,?)";
+$ins = "INSERT INTO `ib_clients` (name, national_id,client_number, phone, adm, password, address,profile_pic) VALUES (?,?,?,?,?,?,?,?)";
 $stmt=$mysqli->prepare($ins);
-$bp=$stmt->bind_param('ssssssss',$name,$national_id,$client_number,$phone,$email,$password,$address,$profile_pic);   
+$bp=$stmt->bind_param('ssssssss',$name,$national_id,$client_number,$phone,$adm,$password,$address,$profile_pic);   
 $stmt->execute(); 
 
 if($stmt){
     $success = "Account created successfully";
-    // echo "Account created successfully";
 }
 else{
   $err = "Account not created successfully";
@@ -59,7 +58,6 @@ while ($auth=$res->fetch_object()){
       <div class="login-logo">
         <p><?php echo $auth->sys_name; ?> - Sign Up</p>
       </div>
-      <!-- /.login-logo -->
       <div class="card">
         <div class="card-body login-card-body">
           <p class="login-box-msg">Sign Up To Use Our IBanking System</p>
@@ -83,7 +81,6 @@ while ($auth=$res->fetch_object()){
             </div>
             <div class="input-group mb-3">
               <?php
-              //PHP function to generate random
               $length = 8;
               $Number =  substr(str_shuffle('0123456789'), 1, $length); ?>
               <input type="text" name="client_number" value="iBank-CLIENT-<?php echo $Number; ?>" class="form-control" placeholder="Client Number">
@@ -110,7 +107,7 @@ while ($auth=$res->fetch_object()){
               </div>
             </div>
             <div class="input-group mb-3">
-              <input type="email" name="email" required class="form-control" placeholder="Client Address">
+              <input type="adm" name="adm" required class="form-control" placeholder="Client Address">
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-envelope"></span>
@@ -136,11 +133,9 @@ while ($auth=$res->fetch_object()){
             <div class="row">
               <div class="col-8">
               </div>
-              <!-- /.col -->
               <div class="col-4">
                 <button type="submit" name="create_account" class="btn btn-success btn-block">Sign Up</button>
               </div>
-              <!-- /.col -->
             </div>
           </form>
 
@@ -149,16 +144,10 @@ while ($auth=$res->fetch_object()){
           </p>
 
         </div>
-        <!-- /.login-card-body -->
       </div>
     </div>
-    <!-- /.login-box -->
-
-    <!-- jQuery -->
     <script src="plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
     <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
     <script src="dist/js/adminlte.min.js"></script>
 
   </body>
