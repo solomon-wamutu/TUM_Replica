@@ -57,7 +57,7 @@ body {
 }
 
 body.demos .section {
-    background: url(images/bg.png) repeat top center #f2f3f5;
+    background: url(images/students.jpg) repeat top center #f2f3f5;
 }
 
 body.demos .section-title img {
@@ -2080,13 +2080,13 @@ select.mobile-device {
 }
 
 #preloader {
-    width: 100%;
-    height: 100%;
+    width: 0%;
+    height: 0%;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    background: #fff;
+    background: green;
     z-index: 11000;
     position: fixed;
     display: block
