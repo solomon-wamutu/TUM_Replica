@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <?php
   $student_id = $_SESSION['student_id'];
-  $ret = "SELECT * FROM  ib_clients  WHERE student_id = ? ";
+  $ret = "SELECT * FROM  student  WHERE student_id = ? ";
   $stmt = $mysqli->prepare($ret);
   $stmt->bind_param('i', $student_id);
   $stmt->execute(); //ok
