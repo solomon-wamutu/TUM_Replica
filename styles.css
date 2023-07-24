@@ -1,3 +1,9 @@
 body.demos .section {
     background: url(images/students.jpg) repeat top center #f2f3f5;
 }
+.tum img{
+ width: 100px; 
+}
+.service-widget{
+    background-color: green;
+}
