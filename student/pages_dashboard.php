@@ -314,15 +314,9 @@ $stmt->close();
   <script src="plugins/raphael/raphael.min.js"></script>
   <script src="plugins/jquery-mapael/jquery.mapael.min.js"></script>
   <script src="plugins/jquery-mapael/maps/usa_states.min.js"></script>
-  <!-- ChartJS -->
   <script src="plugins/chart.js/Chart.min.js"></script>
-
-  <!-- PAGE SCRIPTS -->
   <script src="dist/js/pages/dashboard2.js"></script>
-
-  <!--Load Canvas JS -->
   <script src="plugins/canvasjs.min.js"></script>
-  <!--Load Few Charts-->
   <script>
     window.onload = function() {
 
@@ -394,7 +388,6 @@ $stmt->close();
 
             {
               y: <?php
-                  //return total number of accounts opened under  Fixed Deposit Account deposit  acc type
                   $student_id  = $_SESSION['student_id'];
                   $result = "SELECT count(*) FROM iB_bankAccounts WHERE  acc_type ='Fixed Deposit Account' AND student_id = ? ";
                   $stmt = $mysqli->prepare($result);
