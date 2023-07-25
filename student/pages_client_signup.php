@@ -26,7 +26,7 @@ if(isset($_POST['create_account'])){
   // $stmt->execute();
   }
 else{
-$ins = "INSERT INTO `ib_clients` (name, national_id,client_number, phone, adm, password, address,profile_pic) VALUES (?,?,?,?,?,?,?,?)";
+$ins = "INSERT INTO `student` (name, national_id,client_number, phone, adm, password, address,profile_pic) VALUES (?,?,?,?,?,?,?,?)";
 $stmt=$mysqli->prepare($ins);
 $bp=$stmt->bind_param('ssssssss',$name,$national_id,$client_number,$phone,$adm,$password,$address,$profile_pic);   
 $stmt->execute(); 
@@ -60,7 +60,7 @@ while ($auth=$res->fetch_object()){
       </div>
       <div class="card">
         <div class="card-body login-card-body">
-          <p class="login-box-msg">Sign Up To Use Our IBanking System</p>
+          <p class="login-box-msg">Sign Up To Use Our Services</p>
 
           <form method="post">
             <div class="input-group mb-3">
